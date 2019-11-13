@@ -1,4 +1,4 @@
-package com.example.taskplannerandroid;
+package edu.eci.taskplannerandroid;
 
 import org.junit.Test;
 

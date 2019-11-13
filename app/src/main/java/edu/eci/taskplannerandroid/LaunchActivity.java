@@ -1,6 +1,7 @@
-package com.example.taskplannerandroid;
+package edu.eci.taskplannerandroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -20,13 +21,16 @@ public class LaunchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SharedPreferences sharedPref =
                 getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-
         if (sharedPref.contains(TOKEN_KEY)) {
             //TODO go to MainActivity
-            setContentView(R.layout.activity_main);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         } else {
             //TODO go to LoginActivity
-            setContentView(R.layout.activity_login);
+            /*Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);*/
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
     }
 }
