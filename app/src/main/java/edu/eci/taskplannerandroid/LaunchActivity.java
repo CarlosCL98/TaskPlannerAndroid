@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LaunchActivity extends AppCompatActivity {
 
-    public static final String TOKEN_KEY = "TOKEN_KEY";
+    private static final String TOKEN_KEY = "TOKEN_KEY";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,14 +22,10 @@ public class LaunchActivity extends AppCompatActivity {
         SharedPreferences sharedPref =
                 getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         if (sharedPref.contains(TOKEN_KEY)) {
-            //TODO go to MainActivity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {
-            //TODO go to LoginActivity
-            /*Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);*/
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
     }

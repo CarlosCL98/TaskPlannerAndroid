@@ -1,10 +1,17 @@
 <resources>
-    <string name="app_name">TaskPlannerAndroid</string>
+    <string name="app_name">Task Planner Android</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="preference_file_key" />
+    <string name="preference_file_key"></string><!--edu.eci.taskplannerandroid.PREFERENCE_FILE_KEY-->
+    <string name="login_image_description">Avatar</string>
+    <string name="text_login">Login into your account</string>
+    <string name="input_email_hint">Email</string>
+    <string name="input_password_hint">Password</string>
+    <string name="button_login">Login</string>
+    <string name="button_logout">Logout</string>
+    <string name="token_key">TOKEN_KEY</string>
 </resources>
