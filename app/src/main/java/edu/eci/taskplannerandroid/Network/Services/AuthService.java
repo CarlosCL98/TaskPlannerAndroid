@@ -1,7 +1,7 @@
-package edu.eci.taskplannerandroid.Services;
+package edu.eci.taskplannerandroid.Network.Services;
 
-import edu.eci.taskplannerandroid.Config.Token;
-import edu.eci.taskplannerandroid.Model.LoginWrapper;
+import edu.eci.taskplannerandroid.Network.Data.Token;
+import edu.eci.taskplannerandroid.Network.Data.LoginWrapper;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;

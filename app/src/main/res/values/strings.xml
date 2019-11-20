@@ -13,5 +13,7 @@
     <string name="input_password_hint">Password</string>
     <string name="button_login">Login</string>
     <string name="button_logout">Logout</string>
-    <string name="token_key">TOKEN_KEY</string>
+    <string name="error_input_email_empty">You must enter your email</string>
+    <string name="error_input_email_valid">This email is not valid. Check it</string>
+    <string name="error_input_password_empty">Please enter your password</string>
 </resources>

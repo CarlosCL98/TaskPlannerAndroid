@@ -1,4 +1,4 @@
-package edu.eci.taskplannerandroid.Config;
+package edu.eci.taskplannerandroid.Network.Data;
 
 public class Token {
 

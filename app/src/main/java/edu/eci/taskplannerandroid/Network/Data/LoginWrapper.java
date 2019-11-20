@@ -1,4 +1,4 @@
-package edu.eci.taskplannerandroid.Model;
+package edu.eci.taskplannerandroid.Network.Data;
 
 public class LoginWrapper {
 
