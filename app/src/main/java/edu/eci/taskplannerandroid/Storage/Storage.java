@@ -22,6 +22,10 @@ public class Storage {
         editor.commit();
     }
 
+    public String getToken() {
+        return sharedPreferences.getString(TOKEN_KEY, null);
+    }
+
     public boolean containsToken() {
         return sharedPreferences.contains(TOKEN_KEY);
     }

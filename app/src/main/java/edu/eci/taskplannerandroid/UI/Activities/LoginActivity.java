@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         final LoginActivity self = this;
         if (loginWrapper != null) {
             view.setEnabled(false);
-            Log.d("DEBUG-INICIAL", "loginUser: Se pausará la vista.");
             executorService.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -62,13 +61,9 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         } else {
-                            Log.d("-----DEBUG-----", response.toString());
-                            Log.d("-----DEBUG-----", response.message());
-                            Log.d("-----DEBUG-----", response.errorBody().string());
-                            showErrorMessages(view, response.message());
+                            showErrorMessages(view, "The user doesn't exists or you must verify your credentials.");
                         }
                     } catch (IOException ex) {
-                        Log.d("DEBUG", ex.getMessage());
                         showErrorMessages(view, ex.getMessage());
                     }
                 }

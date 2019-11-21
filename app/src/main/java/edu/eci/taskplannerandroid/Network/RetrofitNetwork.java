@@ -3,6 +3,7 @@ package edu.eci.taskplannerandroid.Network;
 import java.io.IOException;
 
 import edu.eci.taskplannerandroid.Network.Services.AuthService;
+import edu.eci.taskplannerandroid.Network.Services.TaskService;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -13,6 +14,7 @@ public class RetrofitNetwork {
 
     private final String BASE_URL = "https://taskplannerapi.herokuapp.com/";
     private AuthService authService;
+    private TaskService taskService;
 
     public RetrofitNetwork() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -41,10 +43,14 @@ public class RetrofitNetwork {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build())
                 .build();
-        authService = retrofit.create(AuthService.class);
+        taskService = retrofit.create(TaskService.class);
     }
 
     public AuthService getAuthService() {
         return authService;
+    }
+
+    public TaskService getTaskService() {
+        return taskService;
     }
 }
