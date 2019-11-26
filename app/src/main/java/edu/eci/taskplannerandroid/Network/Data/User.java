@@ -1,14 +1,38 @@
 package edu.eci.taskplannerandroid.Network.Data;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "user_table")
 public class User {
 
+    @NonNull
+    @ColumnInfo(name = "id")
     private int id;
+
+    @NonNull
+    @ColumnInfo(name = "name")
     private String name;
+
+    @ColumnInfo(name = "username")
     private String username;
+
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "email")
     private String email;
+
+    @NonNull
+    @ColumnInfo(name = "password")
     private String password;
+
+    @ColumnInfo(name = "avatar")
     private byte[] avatar;
 
+    @Ignore
     public User() {
     }
 

@@ -28,7 +28,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import edu.eci.taskplannerandroid.Network.Data.Task;
+import edu.eci.taskplannerandroid.Network.Persistence.TaskRepository;
 import edu.eci.taskplannerandroid.Network.RetrofitNetwork;
+import edu.eci.taskplannerandroid.Network.Room.TaskPlannerRoomDatabase;
 import edu.eci.taskplannerandroid.R;
 import edu.eci.taskplannerandroid.Storage.Storage;
 import retrofit2.Response;
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity
     private final ExecutorService executorService = Executors.newFixedThreadPool(1);
     private RetrofitNetwork retrofitNetwork;
     private Storage storage;
+    private TaskRepository taskRepository;
+    private List<Task> taskList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         storage = new Storage(this);
         retrofitNetwork = new RetrofitNetwork(storage.getToken());
+        taskRepository = new TaskRepository(this.getApplication());
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -72,9 +78,11 @@ public class MainActivity extends AppCompatActivity
                 try {
                     Response<List<Task>> response = retrofitNetwork.getTaskService().getTasks().execute();
                     if (response.isSuccessful()) {
-                        List<Task> taskList = response.body();
+                        taskList = response.body();
                         for (Task task : taskList) {
                             Log.d("TASKS " + task.getId(), task.toString());
+                            //Add tasks to the local database Room.
+                            taskRepository.insert(task);
                         }
                     }
                 } catch (IOException e) {

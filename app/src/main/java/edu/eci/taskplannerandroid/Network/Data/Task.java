@@ -1,19 +1,46 @@
 package edu.eci.taskplannerandroid.Network.Data;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "task_table")
 public class Task {
 
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "id")
     private int id;
+
+    @NonNull
+    @ColumnInfo(name = "title")
     private String title;
+
+    @NonNull
+    @ColumnInfo(name = "description")
     private String description;
+
+    @NonNull
+    @ColumnInfo(name = "dueDate")
     private String dueDate;
-    private Status status;
+
+    @NonNull
+    @ColumnInfo(name = "status")
+    private String status;
+
+    @ColumnInfo(name = "responsible")
     private User responsible;
+
+    @ColumnInfo(name = "fileUrl")
     private String fileUrl;
 
+    @Ignore
     public Task() {
     }
 
-    public Task(int id, String title, String description, String dueDate, Status status, User responsible, String fileUrl) {
+    public Task(int id, String title, String description, String dueDate, String status, User responsible, String fileUrl) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -26,7 +53,7 @@ public class Task {
     @Override
     public String toString() {
         return String.format(
-                "Customer[id=%s, title='%s', description='%s', dueDate='%s', status='%s', responsible='%s', fileUrl='%s']",
+                "Task[id=%s, title='%s', description='%s', dueDate='%s', status='%s', responsible='%s', fileUrl='%s']",
                 id, title, description, dueDate, status, responsible, fileUrl);
     }
 
@@ -62,11 +89,11 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
