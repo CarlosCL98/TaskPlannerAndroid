@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private Storage storage;
     private EditText email;
     private EditText password;
+    private ProgressBar loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +42,11 @@ public class LoginActivity extends AppCompatActivity {
         storage = new Storage(this);
         email = findViewById(R.id.input_email);
         password = findViewById(R.id.input_password);
+        loading = findViewById(R.id.loading);
     }
 
     public void loginUser(final View view) {
+        loading(true);
         final LoginWrapper loginWrapper = checkInputFields();
         final LoginActivity self = this;
         if (loginWrapper != null) {
@@ -59,12 +63,15 @@ public class LoginActivity extends AppCompatActivity {
                             storage.saveToken(authToken);
                             Intent intent = new Intent(self, MainActivity.class);
                             startActivity(intent);
+                            loading(false);
                             finish();
                         } else {
                             showErrorMessages(view, "The user doesn't exists or you must verify your credentials.");
+                            loading(false);
                         }
                     } catch (IOException ex) {
                         showErrorMessages(view, ex.getMessage());
+                        loading(false);
                     }
                 }
             });
@@ -107,6 +114,19 @@ public class LoginActivity extends AppCompatActivity {
                 view.setEnabled(true);
                 Snackbar.make(view, message, Snackbar.LENGTH_LONG)
                         .show();
+            }
+        });
+    }
+
+    private void loading(boolean isLoading) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (isLoading) {
+                    loading.setVisibility(View.VISIBLE);
+                } else {
+                    loading.setVisibility(View.GONE);
+                }
             }
         });
     }

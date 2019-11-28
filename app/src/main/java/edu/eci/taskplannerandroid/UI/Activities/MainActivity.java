@@ -33,24 +33,18 @@ import edu.eci.taskplannerandroid.Network.RetrofitNetwork;
 import edu.eci.taskplannerandroid.Network.Room.TaskPlannerRoomDatabase;
 import edu.eci.taskplannerandroid.R;
 import edu.eci.taskplannerandroid.Storage.Storage;
+import edu.eci.taskplannerandroid.UI.Main.MainFragment;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
-    private RetrofitNetwork retrofitNetwork;
     private Storage storage;
-    private TaskRepository taskRepository;
-    private List<Task> taskList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         storage = new Storage(this);
-        retrofitNetwork = new RetrofitNetwork(storage.getToken());
-        taskRepository = new TaskRepository(this.getApplication());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -72,24 +66,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Response<List<Task>> response = retrofitNetwork.getTaskService().getTasks().execute();
-                    if (response.isSuccessful()) {
-                        taskList = response.body();
-                        for (Task task : taskList) {
-                            Log.d("TASKS " + task.getId(), task.toString());
-                            //Add tasks to the local database Room.
-                            taskRepository.insert(task);
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.task_container, MainFragment.newInstance())
+                    .commitNow();
+        }
     }
 
     @Override

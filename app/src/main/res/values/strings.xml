@@ -16,4 +16,9 @@
     <string name="error_input_email_empty">You must enter your email</string>
     <string name="error_input_email_valid">This email is not valid. Check it</string>
     <string name="error_input_password_empty">Please enter your password</string>
+    <string name="task_title">Task Title</string>
+    <string name="task_description">Task description</string>
+    <string name="task_status">Task Status</string>
+    <string name="task_due_date">Task DueDate</string>
+    <string name="task_responsible">Task Responsible</string>
 </resources>
